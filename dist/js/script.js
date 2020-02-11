@@ -5,3 +5,6 @@ $(window).scroll(function() {
       $("#menu").removeClass("bg-my-color");
   }
 });
+
+new WOW().init();
+
