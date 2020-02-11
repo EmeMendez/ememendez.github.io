@@ -11,4 +11,6 @@
 }
 .bg-my-color{
     background-color: #032131;
+    transition: all 1s ease;
+
 }
