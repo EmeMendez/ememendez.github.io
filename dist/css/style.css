@@ -15,6 +15,7 @@ html{
 }
 .bg-my-color{
     background-color: #032131;
+    opacity: 0.8;
     transition: all 1s ease;
 
 }
