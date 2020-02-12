@@ -10,18 +10,18 @@ html{
     background-repeat: no-repeat;
     background-size: cover;
 }
+.img-size {
+       height: 100px;
+       width: 100px;
+    }
 
+@media only screen and (max-width: 450px) {
+    .img-size {
+       height: 50px;
+       width: 50px;
+    }
 
- /* @media only screen and (max-width: 400px) {
-    .hero {
-        width: 100%; height:100vh;
-
-        background-image: url('../../img/bg-sm.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover; 
-
-   }  */
+} 
 
 .my-color{
     color: #fa7556;
