@@ -9,20 +9,51 @@ firebase.initializeApp({
     measurementId: "G-T4FSSQ2SVZ"
   });
    // Initialize Firebase
-   var db = firebase.firestore();
+var db = firebase.firestore();
 
 
-   db.collection("users").add({
-    first: "Ana",
-    last: "Hernandez",
-    born: 1995
-})
-.then(function(docRef) {
-    console.log("Document written with ID: ", docRef.id);
-})
-.catch(function(error) {
-    console.error("Error adding document: ", error);
-});
+function ifDefault(){
+    var flag = false;
+    var docRef = db.collection("contact").doc("default");
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            if(doc.data().default == true){
+                getContact("default");
+            }else{
+                getContact("modified");
+            }
+        }
+         else {
+            console.log("No existe el documento");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+
+
+
+function getContact(query){
+    var docRef = db.collection("contact").doc(query);
+    docRef.get().then(function(doc) {
+        let location = document.querySelector('#location'); 
+        let phone = document.querySelector('#phone');
+        let email = document.querySelector('#email');  
+        if (doc.exists) {
+            location.innerHTML = doc.data().location;
+            phone.innerHTML = doc.data().phone;
+            email.innerHTML = doc.data().email;
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+
+ifDefault();
 
 
 
