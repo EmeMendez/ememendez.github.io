@@ -12,48 +12,20 @@ firebase.initializeApp({
 var db = firebase.firestore();
 
 
-function ifDefault(){
-    var flag = false;
+getRealTime = function(){
+    let location = document.querySelector('#location'); 
+    let phone = document.querySelector('#phone');
+    let email = document.querySelector('#email'); 
     var docRef = db.collection("contact").doc("default");
-    docRef.get().then(function(doc) {
-        if (doc.exists) {
-            if(doc.data().default == true){
-                getContact("default");
-            }else{
-                getContact("modified");
-            }
-        }
-         else {
-            console.log("No existe el documento");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
+docRef.onSnapshot(function(doc){
+    if (doc.exists) {
+        location.innerHTML = doc.data().location;
+        phone.innerHTML = doc.data().phone;
+        email.innerHTML = doc.data().email;
+    } else {
+        console.log("No such document!");
+    }
+});
 }
 
-
-
-
-function getContact(query){
-    var docRef = db.collection("contact").doc(query);
-    docRef.get().then(function(doc) {
-        let location = document.querySelector('#location'); 
-        let phone = document.querySelector('#phone');
-        let email = document.querySelector('#email');  
-        if (doc.exists) {
-            location.innerHTML = doc.data().location;
-            phone.innerHTML = doc.data().phone;
-            email.innerHTML = doc.data().email;
-        } else {
-            console.log("No such document!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-}
-
-
-ifDefault();
-
-
-
+getRealTime();

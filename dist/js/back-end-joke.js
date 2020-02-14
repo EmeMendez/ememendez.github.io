@@ -11,26 +11,13 @@ firebase.initializeApp({
    // Initialize Firebase
 var db = firebase.firestore();
 
-var radio_default = document.querySelector("#default");
-var radio_modified = document.querySelector("#modified");
-var div_config = document.querySelector("#div_config");
-radio_default.addEventListener("click",function(){
-   div_config.style.display = "none";
-});
-
-radio_modified.addEventListener("click",function(){
-   div_config.style.display = "block";
-});
-
-
-
 
 var btn = document.querySelector("#btn");
 btn.addEventListener("click",function(){
     let location = document.querySelector("#location").value;
     let phone = document.querySelector("#phone").value;
     let email = document.querySelector("#email").value;
-    db.collection("contact").doc("modified").set({
+    db.collection("contact").doc("default").set({
         location: location,
         phone: phone,
         email: email 
